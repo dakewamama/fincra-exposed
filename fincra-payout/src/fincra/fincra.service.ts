@@ -2,6 +2,8 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
+import { BusinessResponse } from './interfaces/business.interface';
+
 @Injectable()
 export class FincraService {
   private readonly client: AxiosInstance;
@@ -46,7 +48,7 @@ export class FincraService {
         status,
     );
     }
-  async getBusinessId() {
+  async getBusinessId(): Promise<BusinessResponse> {
     const response = await this.client.get('/profile/business/me');
     return response.data;
   }
