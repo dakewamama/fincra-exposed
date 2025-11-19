@@ -17,4 +17,14 @@ describe('FincraService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('getBusinessId', () => {
+    it('should return business details', async () => {
+      const result = await service.getBusinessId();
+      
+      expect(result).toBeDefined();
+      expect(result.data).toBeDefined();
+      expect(result.data.id).toBeTruthy();
+    });
+  });
 });
