@@ -16,3 +16,14 @@ export interface PayoutData {
 }
 
 export type PayoutResponse = FincraResponse<PayoutData>;
+
+export interface PayoutListResponse {
+  status: boolean;
+  message: string;
+  data: PayoutData[];
+  meta?: {
+    total: number;
+    page: number;
+    perPage: number;
+  };
+}

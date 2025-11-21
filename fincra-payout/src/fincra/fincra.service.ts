@@ -6,7 +6,7 @@ import { BusinessResponse } from './interfaces/business.interface';
 import { WalletResponse } from './interfaces/wallet.interface';
 
 import { CreatePayoutDto } from './dto/create-payout.dto';
-import { PayoutResponse } from './interfaces/payout.interface';
+import { PayoutResponse, PayoutListResponse } from './interfaces/payout.interface';
 
 @Injectable()
 export class FincraService {
@@ -69,12 +69,17 @@ export class FincraService {
   }
 
   async fetchPayoutByReference(reference: string): Promise<PayoutResponse> {
-  const response = await this.client.get(`/disbursements/payouts/${reference}`);
-  return response.data;
+    const response = await this.client.get(`/disbursements/payouts/${reference}`);
+    return response.data;
   }
 
   async fetchPayoutByCustomerReference(customerReference: string): Promise<PayoutResponse> {
     const response = await this.client.get(`/disbursements/payouts/by-customer-reference/${customerReference}`);
+    return response.data;
+  }
+
+  async listPayouts(params?: { page?: number; perPage?: number; status?: string }): Promise<PayoutListResponse> {
+    const response = await this.client.get('/disbursements/payouts', { params });
     return response.data;
   }
 }

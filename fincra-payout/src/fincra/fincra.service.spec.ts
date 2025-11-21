@@ -84,4 +84,12 @@ describe('FincraService', () => {
       expect(result.data).toBeDefined();
     });
   });
+
+  describe('listPayouts', () => {
+    it('should list payouts', async () => {
+      const result = await service.listPayouts({ page: 1, perPage: 10 });
+      expect(result).toBeDefined();
+      expect(result.data).toBeDefined();
+    });
+  });
 });
