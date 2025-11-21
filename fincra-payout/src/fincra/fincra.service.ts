@@ -12,6 +12,9 @@ import { WalletToWalletDto } from './dto/wallet-to-wallet.dto';
 import { CreateBeneficiaryDto, UpdateBeneficiaryDto } from './dto/create-beneficiary.dto';
 import { BeneficiaryResponse, BeneficiaryListResponse } from './interfaces/beneficiary.interface';
 
+import { BankListResponse, CurrencyListResponse } from './interfaces/reference.interface';
+
+
 
 @Injectable()
 export class FincraService {
@@ -117,4 +120,15 @@ export class FincraService {
     const response = await this.client.delete(`/profile/beneficiaries/${beneficiaryId}`);
     return response.data;
   }
+
+  async listBanks(params?: { country?: string; currency?: string; type?: string }): Promise<BankListResponse> {
+    const response = await this.client.get('/core/banks', { params });
+    return response.data;
+  }
+
+  async getSupportedCurrencies(): Promise<CurrencyListResponse> {
+    const response = await this.client.get('/core/currencies');
+    return response.data;
+  }
+  
 }

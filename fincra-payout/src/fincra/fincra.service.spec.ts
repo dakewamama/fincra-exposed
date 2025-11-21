@@ -155,4 +155,18 @@ describe('FincraService', () => {
       expect(result).toBeDefined();
     });
   });
+
+  describe('listBanks', () => {
+    it('should list banks', async () => {
+      const result = await service.listBanks({ country: 'NG', currency: 'NGN' });
+      expect(result).toBeDefined();
+    });
+  });
+
+  describe('getSupportedCurrencies', () => {
+    it('should get currencies', async () => {
+      const result = await service.getSupportedCurrencies();
+      expect(result).toBeDefined();
+    });
+  });
 });
