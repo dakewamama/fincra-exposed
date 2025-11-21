@@ -12,7 +12,7 @@ import { WalletToWalletDto } from './dto/wallet-to-wallet.dto';
 import { CreateBeneficiaryDto, UpdateBeneficiaryDto } from './dto/create-beneficiary.dto';
 import { BeneficiaryResponse, BeneficiaryListResponse } from './interfaces/beneficiary.interface';
 
-import { BankListResponse, CurrencyListResponse } from './interfaces/reference.interface';
+import { BankListResponse, CurrencyListResponse, CountryListResponse } from './interfaces/reference.interface';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { RateResponse, QuoteResponse } from './interfaces/quote.interface';
 
@@ -142,6 +142,11 @@ export class FincraService {
 
   async createQuote(dto: CreateQuoteDto): Promise<QuoteResponse> {
     const response = await this.client.post('/core/quotes', dto);
+    return response.data;
+  }
+
+  async getSupportedCountries(): Promise<CountryListResponse> {
+    const response = await this.client.get('/core/countries');
     return response.data;
   }
 }

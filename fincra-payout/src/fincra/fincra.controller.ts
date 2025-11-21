@@ -8,7 +8,7 @@ import { CreateBeneficiaryDto, UpdateBeneficiaryDto } from './dto/create-benefic
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { PayoutResponse, PayoutListResponse } from './interfaces/payout.interface';
 import { BeneficiaryResponse, BeneficiaryListResponse } from './interfaces/beneficiary.interface';
-import { BankListResponse, CurrencyListResponse } from './interfaces/reference.interface';
+import { BankListResponse, CurrencyListResponse, CountryListResponse } from './interfaces/reference.interface';
 import { RateResponse, QuoteResponse } from './interfaces/quote.interface';
 
 @Controller('fincra')
@@ -111,5 +111,10 @@ export class FincraController {
   @Post('quotes')
   async createQuote(@Body() dto: CreateQuoteDto): Promise<QuoteResponse> {
     return this.fincraService.createQuote(dto);
+  }
+
+  @Get('countries')
+  async getSupportedCountries(): Promise<CountryListResponse> {
+    return this.fincraService.getSupportedCountries();
   }
 }

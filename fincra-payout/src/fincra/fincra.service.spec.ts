@@ -189,4 +189,11 @@ describe('FincraService', () => {
       expect(result).toBeDefined();
     });
   });
+
+  describe('getSupportedCountries', () => {
+    it('should get supported countries', async () => {
+      const result = await service.getSupportedCountries();
+      expect(result).toBeDefined();
+    });
+  });
 });

@@ -20,3 +20,11 @@ export interface CurrencyData {
 }
 
 export type CurrencyListResponse = FincraResponse<CurrencyData[]>;
+
+export interface CountryData {
+  code: string;
+  name: string;
+  currency: string;
+}
+
+export type CountryListResponse = FincraResponse<CountryData[]>;
