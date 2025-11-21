@@ -27,4 +27,15 @@ describe('FincraService', () => {
       expect(result.data.id).toBeTruthy();
     });
   });
+
+  describe('getWalletBalance', () => {
+  it('should return wallet balances', async () => {
+    const businessId = 'test-business-id';
+    const result = await service.getWalletBalance(businessId);
+    
+    expect(result).toBeDefined();
+    expect(result.data).toBeDefined();
+    expect(Array.isArray(result.data)).toBe(true);
+    });
+  });
 });

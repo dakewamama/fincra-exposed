@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
 import { BusinessResponse } from './interfaces/business.interface';
+import { WalletResponse } from './interfaces/wallet.interface';
 
 @Injectable()
 export class FincraService {
@@ -39,17 +40,23 @@ export class FincraService {
     const message = errorData.message || error.message || 'Fincra API request failed';
     
     throw new HttpException(
-        {
+      {
         statusCode: status,
         message,
         error: error.response?.data,
         timestamp: new Date().toISOString(),
-        },
-        status,
+      },
+      status,
     );
-    }
+  }
+
   async getBusinessId(): Promise<BusinessResponse> {
     const response = await this.client.get('/profile/business/me');
+    return response.data;
+  }
+
+  async getWalletBalance(businessId: string): Promise<WalletResponse> {
+    const response = await this.client.get(`/profile/business/${businessId}/wallets`);
     return response.data;
   }
 }
