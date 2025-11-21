@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
 import { FincraService } from './fincra.service';
+import { PaymentDestination } from './dto/create-payout.dto';
 
 describe('FincraService', () => {
   let service: FincraService;
@@ -29,13 +30,42 @@ describe('FincraService', () => {
   });
 
   describe('getWalletBalance', () => {
-  it('should return wallet balances', async () => {
-    const businessId = 'test-business-id';
-    const result = await service.getWalletBalance(businessId);
-    
-    expect(result).toBeDefined();
-    expect(result.data).toBeDefined();
-    expect(Array.isArray(result.data)).toBe(true);
+    it('should return wallet balances', async () => {
+      const businessId = 'test-business-id';
+      const result = await service.getWalletBalance(businessId);
+      
+      expect(result).toBeDefined();
+      expect(result.data).toBeDefined();
+      expect(Array.isArray(result.data)).toBe(true);
+    });
+  });
+
+  describe('createPayout', () => {
+    it('should create a payout', async () => {
+      const dto = {
+        business: 'test-business-id',
+        sourceCurrency: 'NGN',
+        destinationCurrency: 'NGN',
+        amount: 10000,
+        description: 'Test payout',
+        customerReference: 'TEST-001',
+        beneficiary: {
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john@example.com',
+          type: 'individual',
+          accountHolderName: 'John Doe',
+          accountNumber: '1234567890',
+          country: 'NG',
+          bankCode: '044',
+        },
+        paymentDestination: PaymentDestination.BANK_ACCOUNT,
+      };
+
+      const result = await service.createPayout(dto);
+      
+      expect(result).toBeDefined();
+      expect(result.data).toBeDefined();
     });
   });
 });

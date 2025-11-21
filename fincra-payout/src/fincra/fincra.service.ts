@@ -5,6 +5,9 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import { BusinessResponse } from './interfaces/business.interface';
 import { WalletResponse } from './interfaces/wallet.interface';
 
+import { CreatePayoutDto } from './dto/create-payout.dto';
+import { PayoutResponse } from './interfaces/payout.interface';
+
 @Injectable()
 export class FincraService {
   private readonly client: AxiosInstance;
@@ -57,6 +60,11 @@ export class FincraService {
 
   async getWalletBalance(businessId: string): Promise<WalletResponse> {
     const response = await this.client.get(`/profile/business/${businessId}/wallets`);
+    return response.data;
+  }
+
+  async createPayout(dto: CreatePayoutDto): Promise<PayoutResponse> {
+    const response = await this.client.post('/disbursements/payouts', dto);
     return response.data;
   }
 }
