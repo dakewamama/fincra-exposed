@@ -3,6 +3,7 @@ import { FincraService } from './fincra.service';
 import { BusinessResponse } from './interfaces/business.interface';
 import { WalletResponse } from './interfaces/wallet.interface';
 import { CreatePayoutDto } from './dto/create-payout.dto';
+import { WalletToWalletDto } from './dto/wallet-to-wallet.dto';
 import { PayoutResponse, PayoutListResponse } from './interfaces/payout.interface';
 
 @Controller('fincra')
@@ -31,6 +32,11 @@ export class FincraController {
     @Query('status') status?: string,
   ): Promise<PayoutListResponse> {
     return this.fincraService.listPayouts({ page, perPage, status });
+  }
+
+  @Post('payouts/wallet-to-wallet')
+  async walletToWalletTransfer(@Body() dto: WalletToWalletDto): Promise<PayoutResponse> {
+    return this.fincraService.walletToWalletTransfer(dto);
   }
 
   @Get('payouts/by-customer-reference/:customerReference')
