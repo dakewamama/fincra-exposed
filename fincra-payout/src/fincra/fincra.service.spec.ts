@@ -50,11 +50,11 @@ describe('FincraService', () => {
         description: 'Test payout',
         customerReference: 'TEST-001',
         beneficiary: {
-          firstName: 'John',
-          lastName: 'Doe',
-          email: 'john@example.com',
+          firstName: 'dake',
+          lastName: 'Asiadiachi',
+          email: 'davidasiadiachi@gmail.com',
           type: 'individual',
-          accountHolderName: 'John Doe',
+          accountHolderName: 'Dake Asiadiachi',
           accountNumber: '1234567890',
           country: 'NG',
           bankCode: '044',
@@ -90,6 +90,21 @@ describe('FincraService', () => {
       const result = await service.listPayouts({ page: 1, perPage: 10 });
       expect(result).toBeDefined();
       expect(result.data).toBeDefined();
+    });
+  });
+
+  describe('walletToWalletTransfer', () => {
+    it('should transfer between wallets', async () => {
+      const dto = {
+        business: 'test-business-id',
+        customerReference: 'W2W-001',
+        amount: 5000,
+        currency: 'NGN',
+        description: 'Internal transfer',
+        recipientEmail: 'davidasiadiachi@gmail.com',
+      };
+      const result = await service.walletToWalletTransfer(dto);
+      expect(result).toBeDefined();
     });
   });
 });

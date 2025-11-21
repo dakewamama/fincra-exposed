@@ -7,6 +7,7 @@ import { WalletResponse } from './interfaces/wallet.interface';
 
 import { CreatePayoutDto } from './dto/create-payout.dto';
 import { PayoutResponse, PayoutListResponse } from './interfaces/payout.interface';
+import { WalletToWalletDto } from './dto/wallet-to-wallet.dto';
 
 @Injectable()
 export class FincraService {
@@ -80,6 +81,11 @@ export class FincraService {
 
   async listPayouts(params?: { page?: number; perPage?: number; status?: string }): Promise<PayoutListResponse> {
     const response = await this.client.get('/disbursements/payouts', { params });
+    return response.data;
+  }
+
+  async walletToWalletTransfer(dto: WalletToWalletDto): Promise<PayoutResponse> {
+    const response = await this.client.post('/disbursements/wallet-to-wallet', dto);
     return response.data;
   }
 }
