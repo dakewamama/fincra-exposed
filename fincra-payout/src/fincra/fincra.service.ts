@@ -9,6 +9,10 @@ import { CreatePayoutDto } from './dto/create-payout.dto';
 import { PayoutResponse, PayoutListResponse } from './interfaces/payout.interface';
 import { WalletToWalletDto } from './dto/wallet-to-wallet.dto';
 
+import { CreateBeneficiaryDto, UpdateBeneficiaryDto } from './dto/create-beneficiary.dto';
+import { BeneficiaryResponse, BeneficiaryListResponse } from './interfaces/beneficiary.interface';
+
+
 @Injectable()
 export class FincraService {
   private readonly client: AxiosInstance;
@@ -86,6 +90,31 @@ export class FincraService {
 
   async walletToWalletTransfer(dto: WalletToWalletDto): Promise<PayoutResponse> {
     const response = await this.client.post('/disbursements/wallet-to-wallet', dto);
+    return response.data;
+  }
+
+  async createBeneficiary(dto: CreateBeneficiaryDto): Promise<BeneficiaryResponse> {
+    const response = await this.client.post('/profile/beneficiaries/business', dto);
+    return response.data;
+  }
+
+  async listBeneficiaries(businessId: string, params?: { page?: number; perPage?: number }): Promise<BeneficiaryListResponse> {
+    const response = await this.client.get(`/profile/beneficiaries/business/${businessId}`, { params });
+    return response.data;
+  }
+
+  async fetchBeneficiary(beneficiaryId: string): Promise<BeneficiaryResponse> {
+    const response = await this.client.get(`/profile/beneficiaries/${beneficiaryId}`);
+    return response.data;
+  }
+
+  async updateBeneficiary(beneficiaryId: string, dto: UpdateBeneficiaryDto): Promise<BeneficiaryResponse> {
+    const response = await this.client.patch(`/profile/beneficiaries/${beneficiaryId}`, dto);
+    return response.data;
+  }
+
+  async deleteBeneficiary(beneficiaryId: string) {
+    const response = await this.client.delete(`/profile/beneficiaries/${beneficiaryId}`);
     return response.data;
   }
 }

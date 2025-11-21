@@ -107,4 +107,52 @@ describe('FincraService', () => {
       expect(result).toBeDefined();
     });
   });
+
+  describe('createBeneficiary', () => {
+    it('should create a beneficiary', async () => {
+      const dto = {
+        business: 'test-business-id',
+        firstName: 'tinubu',
+        lastName: 'dake',
+        email: 'dake@asiadiachi.com',
+        type: 'individual',
+        accountHolderName: 'tinubu dake',
+        accountNumber: '9876543210',
+        country: 'NG',
+        currency: 'NGN',
+        paymentDestination: 'bank_account',
+        bankCode: '044',
+      };
+      const result = await service.createBeneficiary(dto);
+      expect(result).toBeDefined();
+    });
+  });
+
+  describe('listBeneficiaries', () => {
+    it('should list beneficiaries', async () => {
+      const result = await service.listBeneficiaries('test-business-id', { page: 1, perPage: 10 });
+      expect(result).toBeDefined();
+    });
+  });
+
+  describe('fetchBeneficiary', () => {
+    it('should fetch a beneficiary', async () => {
+      const result = await service.fetchBeneficiary('beneficiary-id');
+      expect(result).toBeDefined();
+    });
+  });
+
+  describe('updateBeneficiary', () => {
+    it('should update a beneficiary', async () => {
+      const result = await service.updateBeneficiary('beneficiary-id', { email: 'eg.dake@gmail.com' });
+      expect(result).toBeDefined();
+    });
+  });
+
+  describe('deleteBeneficiary', () => {
+    it('should delete a beneficiary', async () => {
+      const result = await service.deleteBeneficiary('beneficiary-id');
+      expect(result).toBeDefined();
+    });
+  });
 });
