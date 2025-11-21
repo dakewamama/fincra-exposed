@@ -23,4 +23,14 @@ export class FincraController {
   async createPayout(@Body() dto: CreatePayoutDto): Promise<PayoutResponse> {
     return this.fincraService.createPayout(dto);
   }
+
+  @Get('payouts/:reference')
+  async fetchPayoutByReference(@Param('reference') reference: string): Promise<PayoutResponse> {
+    return this.fincraService.fetchPayoutByReference(reference);
+  }
+
+  @Get('payouts/by-customer-reference/:customerReference')
+  async fetchPayoutByCustomerReference(@Param('customerReference') customerReference: string): Promise<PayoutResponse> {
+    return this.fincraService.fetchPayoutByCustomerReference(customerReference);
+  }
 }
