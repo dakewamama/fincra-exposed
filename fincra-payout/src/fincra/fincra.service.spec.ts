@@ -68,4 +68,20 @@ describe('FincraService', () => {
       expect(result.data).toBeDefined();
     });
   });
+
+  describe('fetchPayoutByReference', () => {
+    it('should fetch payout by Fincra reference', async () => {
+      const result = await service.fetchPayoutByReference('FINCRA-REF-123');
+      expect(result).toBeDefined();
+      expect(result.data).toBeDefined();
+    });
+  });
+
+  describe('fetchPayoutByCustomerReference', () => {
+    it('should fetch payout by customer reference', async () => {
+      const result = await service.fetchPayoutByCustomerReference('CUST-REF-123');
+      expect(result).toBeDefined();
+      expect(result.data).toBeDefined();
+    });
+  });
 });

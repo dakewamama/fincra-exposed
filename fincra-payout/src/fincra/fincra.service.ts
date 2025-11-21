@@ -67,4 +67,14 @@ export class FincraService {
     const response = await this.client.post('/disbursements/payouts', dto);
     return response.data;
   }
+
+  async fetchPayoutByReference(reference: string): Promise<PayoutResponse> {
+  const response = await this.client.get(`/disbursements/payouts/${reference}`);
+  return response.data;
+  }
+
+  async fetchPayoutByCustomerReference(customerReference: string): Promise<PayoutResponse> {
+    const response = await this.client.get(`/disbursements/payouts/by-customer-reference/${customerReference}`);
+    return response.data;
+  }
 }
