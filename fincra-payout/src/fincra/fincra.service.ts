@@ -13,6 +13,8 @@ import { CreateBeneficiaryDto, UpdateBeneficiaryDto } from './dto/create-benefic
 import { BeneficiaryResponse, BeneficiaryListResponse } from './interfaces/beneficiary.interface';
 
 import { BankListResponse, CurrencyListResponse } from './interfaces/reference.interface';
+import { CreateQuoteDto } from './dto/create-quote.dto';
+import { RateResponse, QuoteResponse } from './interfaces/quote.interface';
 
 
 
@@ -131,4 +133,15 @@ export class FincraService {
     return response.data;
   }
   
+  async getExchangeRate(sourceCurrency: string, destinationCurrency: string): Promise<RateResponse> {
+    const response = await this.client.get('/core/rates', {
+      params: { sourceCurrency, destinationCurrency },
+    });
+    return response.data;
+  }
+
+  async createQuote(dto: CreateQuoteDto): Promise<QuoteResponse> {
+    const response = await this.client.post('/core/quotes', dto);
+    return response.data;
+  }
 }

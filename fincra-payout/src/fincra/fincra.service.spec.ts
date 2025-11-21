@@ -169,4 +169,24 @@ describe('FincraService', () => {
       expect(result).toBeDefined();
     });
   });
+
+  describe('getExchangeRate', () => {
+    it('should get exchange rate', async () => {
+      const result = await service.getExchangeRate('USD', 'NGN');
+      expect(result).toBeDefined();
+    });
+  });
+
+  describe('createQuote', () => {
+    it('should create a quote', async () => {
+      const dto = {
+        business: 'test-business-id',
+        sourceCurrency: 'USD',
+        destinationCurrency: 'NGN',
+        amount: 1000,
+      };
+      const result = await service.createQuote(dto);
+      expect(result).toBeDefined();
+    });
+  });
 });
