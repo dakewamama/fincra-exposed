@@ -5,9 +5,11 @@ import { WalletResponse } from './interfaces/wallet.interface';
 import { CreatePayoutDto } from './dto/create-payout.dto';
 import { WalletToWalletDto } from './dto/wallet-to-wallet.dto';
 import { CreateBeneficiaryDto, UpdateBeneficiaryDto } from './dto/create-beneficiary.dto';
+import { CreateQuoteDto } from './dto/create-quote.dto';
 import { PayoutResponse, PayoutListResponse } from './interfaces/payout.interface';
 import { BeneficiaryResponse, BeneficiaryListResponse } from './interfaces/beneficiary.interface';
 import { BankListResponse, CurrencyListResponse } from './interfaces/reference.interface';
+import { RateResponse, QuoteResponse } from './interfaces/quote.interface';
 
 @Controller('fincra')
 export class FincraController {
@@ -96,5 +98,18 @@ export class FincraController {
   @Get('currencies')
   async getSupportedCurrencies(): Promise<CurrencyListResponse> {
     return this.fincraService.getSupportedCurrencies();
+  }
+
+  @Get('rates')
+  async getExchangeRate(
+    @Query('sourceCurrency') sourceCurrency: string,
+    @Query('destinationCurrency') destinationCurrency: string,
+  ): Promise<RateResponse> {
+    return this.fincraService.getExchangeRate(sourceCurrency, destinationCurrency);
+  }
+
+  @Post('quotes')
+  async createQuote(@Body() dto: CreateQuoteDto): Promise<QuoteResponse> {
+    return this.fincraService.createQuote(dto);
   }
 }
