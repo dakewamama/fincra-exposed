@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Body, Param, Query } from '@nestjs/common';
 import { FincraService } from './fincra.service';
 import { BusinessResponse } from './interfaces/business.interface';
 import { WalletResponse } from './interfaces/wallet.interface';
 import { CreatePayoutDto } from './dto/create-payout.dto';
 import { WalletToWalletDto } from './dto/wallet-to-wallet.dto';
+import { CreateBeneficiaryDto, UpdateBeneficiaryDto } from './dto/create-beneficiary.dto';
 import { PayoutResponse, PayoutListResponse } from './interfaces/payout.interface';
+import { BeneficiaryResponse, BeneficiaryListResponse } from './interfaces/beneficiary.interface';
 
 @Controller('fincra')
 export class FincraController {
@@ -47,5 +49,37 @@ export class FincraController {
   @Get('payouts/:reference')
   async fetchPayoutByReference(@Param('reference') reference: string): Promise<PayoutResponse> {
     return this.fincraService.fetchPayoutByReference(reference);
+  }
+
+  @Post('beneficiaries')
+  async createBeneficiary(@Body() dto: CreateBeneficiaryDto): Promise<BeneficiaryResponse> {
+    return this.fincraService.createBeneficiary(dto);
+  }
+
+  @Get('beneficiaries/business/:businessId')
+  async listBeneficiaries(
+    @Param('businessId') businessId: string,
+    @Query('page') page?: number,
+    @Query('perPage') perPage?: number,
+  ): Promise<BeneficiaryListResponse> {
+    return this.fincraService.listBeneficiaries(businessId, { page, perPage });
+  }
+
+  @Get('beneficiaries/:beneficiaryId')
+  async fetchBeneficiary(@Param('beneficiaryId') beneficiaryId: string): Promise<BeneficiaryResponse> {
+    return this.fincraService.fetchBeneficiary(beneficiaryId);
+  }
+
+  @Patch('beneficiaries/:beneficiaryId')
+  async updateBeneficiary(
+    @Param('beneficiaryId') beneficiaryId: string,
+    @Body() dto: UpdateBeneficiaryDto,
+  ): Promise<BeneficiaryResponse> {
+    return this.fincraService.updateBeneficiary(beneficiaryId, dto);
+  }
+
+  @Delete('beneficiaries/:beneficiaryId')
+  async deleteBeneficiary(@Param('beneficiaryId') beneficiaryId: string) {
+    return this.fincraService.deleteBeneficiary(beneficiaryId);
   }
 }
