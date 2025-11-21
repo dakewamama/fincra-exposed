@@ -4,15 +4,15 @@ A production-ready NestJS REST API that wraps Fincra's Payout API. This service 
 
 ## Features
 
-- ✅ **Business Operations**: Get business details and wallet balances
-- ✅ **Payouts**: Create, track, and list payouts (bank transfers, mobile money)
-- ✅ **Wallet-to-Wallet**: Internal transfers between Fincra wallets
-- ✅ **Beneficiary Management**: Save, list, update, and delete recipients
-- ✅ **Reference Data**: Banks, mobile money providers, currencies
-- ✅ **Rates & Quotes**: Real-time exchange rates and locked-rate quotes
-- ✅ **Type Safety**: Full TypeScript support with interfaces
-- ✅ **Validation**: Request validation using class-validator
-- ✅ **Error Handling**: Consistent error responses
+-  **Business Operations**: Get business details and wallet balances
+-  **Payouts**: Create, track, and list payouts (bank transfers, mobile money)
+-  **Wallet-to-Wallet**: Internal transfers between Fincra wallets
+-  **Beneficiary Management**: Save, list, update, and delete recipients
+-  **Reference Data**: Banks, mobile money providers, currencies
+-  **Rates & Quotes**: Real-time exchange rates and locked-rate quotes
+-  **Type Safety**: Full TypeScript support with interfaces
+-  **Validation**: Request validation using class-validator
+-  **Error Handling**: Consistent error responses
 
 ## Table of Contents
 
@@ -122,8 +122,8 @@ GET /fincra/business
   "message": "Business retrieved successfully",
   "data": {
     "id": "business-id-123",
-    "name": "Acme Corp",
-    "email": "contact@acme.com",
+    "name": "dake Corp",
+    "email": "contact@dake.com",
     "country": "NG",
     "currency": "NGN",
     "status": "active"
@@ -173,9 +173,9 @@ Content-Type: application/json
   "description": "Salary payment",
   "customerReference": "PAY-001",
   "beneficiary": {
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john@example.com",
+    "firstName": "Ebele",
+    "lastName": "Dake",
+    "email": "dake@example.com",
     "type": "individual",
     "accountHolderName": "John Doe",
     "accountNumber": "1234567890",
@@ -244,11 +244,11 @@ Content-Type: application/json
 ```json
 {
   "business": "business-id-123",
-  "firstName": "Jane",
-  "lastName": "Doe",
-  "email": "jane@example.com",
+  "firstName": "Ebele",
+  "lastName": "Dake",
+  "email": "dake@example.com",
   "type": "individual",
-  "accountHolderName": "Jane Doe",
+  "accountHolderName": "dake",
   "accountNumber": "9876543210",
   "country": "NG",
   "currency": "NGN",
