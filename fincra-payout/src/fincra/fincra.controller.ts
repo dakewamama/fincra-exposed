@@ -7,6 +7,7 @@ import { WalletToWalletDto } from './dto/wallet-to-wallet.dto';
 import { CreateBeneficiaryDto, UpdateBeneficiaryDto } from './dto/create-beneficiary.dto';
 import { PayoutResponse, PayoutListResponse } from './interfaces/payout.interface';
 import { BeneficiaryResponse, BeneficiaryListResponse } from './interfaces/beneficiary.interface';
+import { BankListResponse, CurrencyListResponse } from './interfaces/reference.interface';
 
 @Controller('fincra')
 export class FincraController {
@@ -81,5 +82,19 @@ export class FincraController {
   @Delete('beneficiaries/:beneficiaryId')
   async deleteBeneficiary(@Param('beneficiaryId') beneficiaryId: string) {
     return this.fincraService.deleteBeneficiary(beneficiaryId);
+  }
+
+  @Get('banks')
+  async listBanks(
+    @Query('country') country?: string,
+    @Query('currency') currency?: string,
+    @Query('type') type?: string,
+  ): Promise<BankListResponse> {
+    return this.fincraService.listBanks({ country, currency, type });
+  }
+
+  @Get('currencies')
+  async getSupportedCurrencies(): Promise<CurrencyListResponse> {
+    return this.fincraService.getSupportedCurrencies();
   }
 }
